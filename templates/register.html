@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register user</title>
+</head>
+<body>
+<form method="post" action="{{ url_for('register') }}" enctype="multipart/form-data"  onsubmit="disableSubmitButton()">
+        {{ form.csrf_token }}
+        <p>{{ form.name.label }} {{ form.name() }}</p>
+        <p>{{ form.email.label }} {{ form.email() }}</p>
+        <p>{{ form.somthing.label }} {{ form.somthing() }}</p>
+        <p>{{ form.company.label }} {{ form.company() }}</p>
+        <p>{{ form.submit.label  }} {{ form.submit(id="submit-button") }}</p>
+
+    </form>
+
+<!-- this javascript code prevent multiple submission (multiple clicking problem) -->
+<script>
+    function disableSubmitButton() {
+        document.getElementById('submit-button').disabled = true;
+    }
+</script>
+
+</body>
+</html>
