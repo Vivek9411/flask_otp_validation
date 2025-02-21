@@ -36,8 +36,10 @@ def register():
         session['email'] = request.form['email']
         session['somthing'] = request.form['somthing']
         session['company'] = request.form['company']
+        # session['done']=True
         return redirect(url_for('verify_email'))
     else:
+        session['done'] = False
         return render_template('register.html', form=new_form)
 
 
@@ -62,9 +64,12 @@ def verify_email():
                 session.pop('company', None)
                 return "<h1>OTP verification failed</h1>"
         else:
-            session['otp'] = generate_otp().get_otp()
-            send_mail(session['email'], 
-                      f'Your otp is {session["otp"]} ,please dont share it with anyone')
+            if 'done' in session.keys() and session['done']==False:
+                print(2)
+                session['done'] = True
+                session['otp'] = generate_otp().get_otp()
+                send_mail(session['email'],
+                          f'Your otp is {session["otp"]} ,please dont share it with anyone')
 
             return render_template('verification.html', form=form)
     else:
@@ -72,4 +77,4 @@ def verify_email():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

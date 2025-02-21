@@ -4,9 +4,13 @@ import random
 from random import choice
 import time
 import ssl
+
+from dominate.tags import body
+
 # workd only for gmail
-PASSWORD ='googleapppassword'
-email_sender = 'gmail@address.com'
+PASSWORD ='app_password_by_gmail'
+email_sender = 'username@gmail.com'
+
 
 
 #use this or choose each digit of otp 
@@ -33,3 +37,4 @@ class send_mail:
         connection.sendmail(from_addr=email_sender, to_addrs=self.email, msg=self.body)
         connection.close()
 
+# send_mail('2100520100163@ietlucknow.ac.in', "this is body")
